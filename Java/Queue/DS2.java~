@@ -1,0 +1,92 @@
+import java.util.*;
+import java.io.*;
+
+
+class Queue {
+	private int queue[];
+	private int front;
+	private int rear;
+	
+	Queue(int size) {
+		queue = new int[size];
+		front = rear = -1;
+	}
+	
+	public void push(int val) {
+		if(rear==queue.length-1) {
+			System.out.println("Queue Overflow");
+			return;
+		}
+		
+		else if(front==-1) {
+			front=rear=0;
+			queue[front] = val;
+		}
+		
+		else {
+			queue[++rear] = val;
+		}
+	}
+	
+	public int pop() {
+		if(rear==-1) {
+			System.out.println("Queue Underflow");
+			return -1;
+		}
+		
+		else {
+			int toReturn = queue[front];
+			if(front == rear) {
+				front = rear = -1;
+			}
+			
+			else {
+				++front;
+			}
+			
+			return toReturn;
+		}
+	}
+	
+	public void display() {
+		if(front == -1) {
+			System.out.print("Queue Empty");
+			return;
+		}
+		for(int i=front;i<=rear;++i) {
+			System.out.print("-->" + queue[i]);
+		}
+	}
+};
+
+class DS2 {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int size = in.nextInt();
+		
+		Queue newQueue = new Queue(size);
+		
+		for(int i=0;i<size;++i) {
+			int temp = in.nextInt();
+			newQueue.push(temp);
+		}
+		
+		newQueue.display();
+		
+		System.out.println("\n" + newQueue.pop());
+		System.out.println(newQueue.pop());
+		System.out.println(newQueue.pop());
+		System.out.println(newQueue.pop());
+		System.out.println(newQueue.pop());
+		
+		/*newQueue.push(5);
+		newQueue.push(4);
+		newQueue.push(3);
+		newQueue.push(2);
+		newQueue.push(1);*/
+		
+		newQueue.display();			
+	}
+};
+
+

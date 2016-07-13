@@ -1,0 +1,79 @@
+import java.util.*;
+import java.io.*;
+
+class Node {
+	public int payload;
+	public Node left;
+	public Node right;
+	
+	Node(int payload) {
+		this.payload = payload;
+		left = null;
+		right = null;
+	}
+};
+
+class Tree {
+	public static Node root;
+	
+	Tree() {
+		root = null;
+	}
+	
+	public void insertNode(int payload) {
+		Node node = new Node(payload);
+		if(root == null) {
+			root = node;
+			return;
+		}
+		
+		Node ptr = root;
+		Node parent = null;
+		while(true) {
+			parent = ptr;
+			if(payload < ptr.payload) {
+				ptr = ptr.left;
+				if(ptr==null) {
+					parent.left = ptr;
+					return;
+				}
+			}
+			
+			else {
+				ptr = ptr.right;
+				if(ptr==null) {
+					parent.right = ptr;
+					return;
+				}
+			}
+		}
+		
+	}
+	
+	public void display(Node root) {
+		if(root!=null) {
+			display(root.left);
+			System.out.print(" --> " + root.payload);
+			display(root.right);
+		}
+	}
+	
+};
+
+class DS4 {
+	public static void main(String[] args) {
+		Tree tree = new Tree();
+		//tree.insertNode(5);
+		tree.insertNode(1);
+		tree.insertNode(9);
+		tree.insertNode(6);
+		tree.insertNode(3);
+		tree.insertNode(4);
+		
+		tree.display(tree.root);
+		
+	
+	}
+};
+
+
